@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ENV_PATH='/home/saca/workplace/algo/py/codejam/env'
+ENV_PATH=$(dirname "$0")
 TEMPLATE_PATH="$ENV_PATH/templates"
 
 function initTaskDir {
