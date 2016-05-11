@@ -8,7 +8,7 @@ from message import NumberOfNodes, MyNodeId
 from message import PutChar, PutInt, PutLL, Send
 from message import Receive as Recv, GetChar, GetInt, GetLL
 
-import 
+import sandwich
 
 def PutC(nodeId, *args):
     for arg in args:
@@ -29,3 +29,29 @@ def GetL(nodeId, howMany=1):
 
 numNodes = NumberOfNodes()
 crtNodeId = MyNodeId()
+N = sandwich.GetN()
+
+start = N * crtNodeId / numNodes
+end = N * (crtNodeId + 1) / numNodes
+
+total, bestWithin, bestL, bestR = 0, 0, 0, 0
+for val in (-sandwich.GetTaste(idx) for idx in xrange(start, end)):
+    total += val
+    bestL = max(bestL, total)
+    bestR = max(bestR + val, 0)
+    bestWithin = max(bestWithin, bestR)
+
+if crtNodeId:
+    PutL(0, total, bestWithin, bestL, bestR)
+    Send(0)
+else:
+    best, dp = bestWithin, bestR
+
+    for nodeId in xrange(1, numNodes):
+        Recv(nodeId)
+        part, bestWithin, bestL, bestR = GetL(nodeId, 4)
+
+        total += part
+        best = max(best, bestWithin, dp + bestL)
+        dp = max(dp + part, bestR)
+    print -total + best
