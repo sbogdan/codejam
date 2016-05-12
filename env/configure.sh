@@ -31,6 +31,7 @@ else
         do
             mkdir "$TASK_NAME"
             cp "$RES_PATH/${CJ_TYPE}Solver.py" "$TASK_NAME/$TASK_NAME.py"
+            cp "$RES_PATH/${CJ_TYPE}GenerateInput.py" "$TASK_NAME/generateInput.py"
         done
     }
 fi
