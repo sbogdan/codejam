@@ -4,7 +4,7 @@ from itertools import ifilter, islice, imap, izip
 from itertools import combinations as combos, combinations_with_replacement as replCombos, product, permutations as perms
 from random import choice, randint, random, randrange, shuffle
 
-from message import NumberOfNodes, MyNodeId
+import message
 from message import PutChar, PutInt, PutLL, Send
 from message import Receive as Recv, GetChar, GetInt, GetLL
 
@@ -27,5 +27,5 @@ def GetI(nodeId, howMany=1):
 def GetL(nodeId, howMany=1):
     return tuple(GetLL(nodeId) for _ in xrange(howMany))
 
-numNodes = NumberOfNodes()
-crtNodeId = MyNodeId()
+NumNodes = message.NumberOfNodes()
+MyNodeId = message.MyNodeId()
