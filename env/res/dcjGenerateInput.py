@@ -2,18 +2,17 @@
 import random
 import sys
 
+print "import random"
+print "random.seed(" + str(random.randint(0, 100)) + ")"
+
 def constantFunction(name, constant):
     print "def {}(): return {}".format(name, constant)
 
-def indexFunction(name, upperLimit, generatorFn):
-    print "def {}(idx):".format(name)
-    for idx in xrange(upperLimit):
-        print "  {}if idx == {}: return {}".format("el" if idx else "", idx, generatorFn())
-
-def randomGenerator():
-    return random.randint(0, 1000000)
+def indexFunction(name, n, lower, upper):
+    print "_{}s=[random.randint({}, {}) for _ in xrange({})]".format(name, lower, upper, n)
+    print "def {}(idx): return _{}s[idx]".format(name, name)
 
 N = int(sys.argv[1])
 
 constantFunction("GetN", N)
-indexFunction("GetValue", N, randomGenerator)
+indexFunction("GetValue", N, 0, 10000)
