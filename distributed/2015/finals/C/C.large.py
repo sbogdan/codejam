@@ -47,14 +47,10 @@ def ge(positions, x):
             ans += cnt
     return -1 if ans == -1 else positions[ans]
 
-code = dict()
-neckPos = []
+neckPos = [[] for _ in xrange(10001)]
 for neckIdx in xrange(neckS, neckE):
-    neck = necklace.GetNecklaceElement(neckIdx)
-    if not neck in code:
-        code[neck] = len(code)
-        neckPos.append([])
-    neckPos[code[neck]].append(neckIdx)
+    x = necklace.GetNecklaceElement(neckIdx)
+    neckPos[x].append(neckIdx)
 
 neckPos = map(list, map(reversed, neckPos))
 
@@ -64,11 +60,7 @@ for mesgS in xrange(mesgL):
     neckIdx = neckS
     ln = 0
     for mesgIdx in xrange(mesgS, mesgL):
-        m = mesg[mesgIdx]
-        if not m in code:
-            break
-        
-        neckIdx = ge(neckPos[code[m]], neckIdx) + 1
+        neckIdx = ge(neckPos[mesg[mesgIdx]], neckIdx) + 1
         if not neckIdx:
             break
         ln += 1
