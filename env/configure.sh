@@ -8,6 +8,15 @@ else
     ABS_PATH_CLI=$(dirname "$0")/abspath
     ENV_PATH=$($ABS_PATH_CLI $(dirname "$0"))
     RES_PATH="$ENV_PATH/res"
+    function downloadInput {
+        INPUT_NAME=${1?"downloadInput <INPUT_NAME>"}
+        mv ~/Downloads/$INPUT_NAME.py $inputName.py.1
+        idx=2
+        for f in ~/Downloads/${INPUT_NAME}*py; do
+            mv $f $inputName.py.$idx
+            ((idx+=1))
+        done
+    }
 
     if [[ "$CJ_TYPE" == "cj" ]]; then
         echo "CodeJam environment:"
@@ -24,6 +33,7 @@ else
         echo "[*] dcj"
         echo "[*] dcjt <source.py> --nodes 10 # build & run"
         echo "[*] msgLib # less message.py"
+        echo "[*] downloadInput <INPUT_NAME>"
     fi
 
     function initTaskDir {
