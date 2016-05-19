@@ -10,10 +10,12 @@ else
     RES_PATH="$ENV_PATH/res"
     function downloadInput {
         INPUT_NAME=${1?"downloadInput <INPUT_NAME>"}
-        mv ~/Downloads/$INPUT_NAME.py $inputName.py.1
+        mv ~/Downloads/$INPUT_NAME.py $INPUT_NAME.py.1
+        ln -sf $INPUT_NAME.py.1 $INPUT_NAME.py
         idx=2
+
         for f in ~/Downloads/${INPUT_NAME}*py; do
-            mv $f $inputName.py.$idx
+            mv $f $INPUT_NAME.py.$idx
             ((idx+=1))
         done
     }
