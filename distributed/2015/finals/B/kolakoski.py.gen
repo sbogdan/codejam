@@ -1,0 +1,5 @@
+import random
+random.seed(3)
+def GetIndex(): return 10000000
+_GetMultipliers=[random.randint(1, 50) for _ in xrange(10000000)]
+def GetMultiplier(idx): return _GetMultipliers[idx]
