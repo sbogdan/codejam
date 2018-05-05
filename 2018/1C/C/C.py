@@ -21,13 +21,26 @@ class Mouth():
 
 
 def readInput():
-    read = _
-    return read
+    N = readValue(int)
+    return N, readValues(int)
 
 
 def solve(*args):
-    _
+    N, W = args
 
+    best = 1
+    bestW = [None] * N
+    bestW[0] = W[0]
+
+    for i, w in enumerate(W):
+        for k in reversed(range(1, min(i + 1, best + 1))):
+            if bestW[k-1] is not None and w * 6 >= bestW[k-1]:
+                if bestW[k] is None or bestW[k] > bestW[k-1] + w:
+                    bestW[k] = bestW[k-1] + w
+                    best = max(best, k + 1)
+        bestW[0] = min(bestW[0], w)
+
+    return best
 
 if __name__ == '__main__':
     for _ in range(readValue(int)):

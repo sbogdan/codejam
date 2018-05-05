@@ -21,14 +21,14 @@ class Mouth():
 
 
 def readInput():
-    read = _
+    read = None
     return read
 
 
-def solve(*args):
-    _
+def solve(*args, **kwargs):
+    pass
 
 
 if __name__ == '__main__':
     for _ in range(readValue(int)):
-        Mouth.answer(solve(*readInput()))
+        Mouth.answer(solve(readInput()))
